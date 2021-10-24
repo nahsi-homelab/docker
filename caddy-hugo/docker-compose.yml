@@ -1,0 +1,13 @@
+services:
+  caddy-hugo:
+    image: "nahsihub/caddy-hugo:${CADDY_VERSION}-${HUGO_VERSION}"
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        GOOS: "${GOOS}"
+        GOARCH: "${GOARCH}"
+        CADDY_VERSION: "${CADDY_VERSION}"
+        XCADDY_VERSION: "${XCADDY_VERSION}"
+        CADDY_WEBHOOK_VERSION: "${CADDY_WEBHOOK_VERSION}"
+        HUGO_VERSION: "${HUGO_VERSION}"
