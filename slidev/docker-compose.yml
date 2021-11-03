@@ -1,0 +1,12 @@
+services:
+  slidev:
+    image: "nahsihub/slidev:${SLIDEV_VERSION}"
+    build:
+      context: .
+      args:
+        SLIDEV_VERSION: "${SLIDEV_VERSION}"
+    ports:
+      - "3030:3030"
+    volumes: 
+      - "./:/home/node/slides"
+    working_dir: "/home/node/slides"
