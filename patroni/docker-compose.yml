@@ -1,0 +1,30 @@
+services:
+  consul:
+    image: consul
+    environment:
+      CONSUL_BIND_INTERFACE: eth0
+    ports:
+      - "8850:8500"
+    command:
+      - consul
+      - agent
+      - -dev
+      - -ui
+      - -client=0.0.0.0
+      - -bind=0.0.0.0
+
+  patroni01: &patroni
+    build: .
+    environment:
+      PATRONI_SUPERUSER_USERNAME: postgres
+      PATRONI_SUPERUSER_PASSWORD: postgres
+      PATRONI_REPLICATION_USERNAME: repl
+      PATRONI_REPLICATION_PASSWORD: repl
+    entrypoint: "/entrypoint.sh"
+    volumes:
+      - "${PWD}/entrypoint.sh:/entrypoint.sh"
+      - "${PWD}/patroni.yml:/patroni.yml"
+    command: "patroni.yml"
+
+  patroni02:
+    <<: *patroni
