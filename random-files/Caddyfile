@@ -1,0 +1,4 @@
+:80
+  
+root * {$SERVER_ROOT}
+file_server browse
