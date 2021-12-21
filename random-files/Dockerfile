@@ -1,6 +1,6 @@
 FROM caddy:2.4.6-alpine
 
-ENV SERVER_ROOT=/files SERVER_PATH=/
+ENV SERVER_ROOT=/files
 RUN mkdir $SERVER_ROOT && chown nobody:nobody $SERVER_ROOT
 
 USER nobody
