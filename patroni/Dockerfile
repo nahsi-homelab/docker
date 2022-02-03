@@ -12,10 +12,6 @@ RUN apt-get update \
 COPY --from=wal-g /wal-g /usr/local/bin/wal-g
 
 VOLUME /data
-USER postgres
 
-STOPSIGNAL SIGINT
-
-ENTRYPOINT ["python3"]
-CMD ["/usr/local/bin/patroni"]
-ARG ["--help"]
+ENTRYPOINT ["patroni"]
+CMD ["--help"]
