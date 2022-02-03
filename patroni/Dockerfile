@@ -16,6 +16,6 @@ USER postgres
 
 STOPSIGNAL SIGINT
 
-ENTRYPOINT ["python"]
-CMD ["patroni"]
+ENTRYPOINT ["python3"]
+CMD ["/usr/local/bin/patroni"]
 ARG ["--help"]
