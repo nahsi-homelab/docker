@@ -14,6 +14,8 @@ COPY --from=wal-g /wal-g /usr/local/bin/wal-g
 VOLUME /data
 USER postgres
 
-COPY entrypoint.sh /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
-CMD ["--help"]
+STOPSIGNAL SIGINT
+
+ENTRYPOINT ["python"]
+CMD ["patroni"]
+ARG ["--help"]
