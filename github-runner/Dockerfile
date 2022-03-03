@@ -17,6 +17,8 @@ RUN apt-get update -y && apt-get upgrade -y \
     rsync \
     gnupg
 
+RUN groupadd docker --gid 998
+
 # install Docker
 RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - \
     && echo "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable" > /etc/apt/sources.list.d/docker.list \
@@ -27,7 +29,7 @@ RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add - \
     && echo "deb [arch=amd64] https://apt.releases.hashicorp.com focal main" > /etc/apt/sources.list.d/hashicorp.list \
     && apt-get update -y && apt-get install -y consul vault nomad terraform packer
 
-RUN rm -rf /var/lib/apt/lists/* && useradd -m runner -G docker
+RUN useradd -m runner -G docker
 
 RUN mkdir $RUNNER_DIR
 
@@ -35,7 +37,8 @@ COPY *.sh /
 
 RUN /install.sh \
     && chown -R runner ~runner \
-    && $RUNNER_DIR/bin/installdependencies.sh
+    && $RUNNER_DIR/bin/installdependencies.sh \
+    && rm -rf /var/lib/apt/lists/*
 
 USER runner
 
