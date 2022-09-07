@@ -1,5 +1,5 @@
 FROM node:17-alpine as builder
-ARG version=3.2.4
+ARG version=3.4.0
 ENV NODE_ENV=production
 RUN apk add --no-cache python2 g++ make git
 RUN git clone https://github.com/zone-eu/zone-mta-template /app
