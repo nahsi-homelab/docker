@@ -1,5 +1,5 @@
 FROM rust:1-alpine as build
-ARG VERSION=v0.3.3
+ARG VERSION=v0.3.4
 ENV RUSTFLAGS="-C target-feature=-crt-static"
 WORKDIR /usr/src/spotifyd
 RUN apk add --no-cache git alsa-lib-dev pulseaudio-dev openssl-dev musl-dev
