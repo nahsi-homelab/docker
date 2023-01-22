@@ -3,11 +3,11 @@ RUN apk add --no-cache wget
 RUN wget -q https://github.com/wal-g/wal-g/releases/download/v2.0.1/wal-g-pg-ubuntu-20.04-amd64 -O /wal-g && chmod 777 /wal-g
 
 FROM postgres:15
-ARG version=2.1.5
+ARG version=2.1.7
 RUN apt-get update \
     && apt-get install --no-install-recommends python3 python3-pip gosu -y \
     && apt-get clean && rm -rf /var/lib/apt/lists/* \
-    && pip3 install --no-cache patroni==${version} patroni[consul] psycopg2-binary
+    && pip3 install --no-cache patroni==${version} python-consul2 psycopg2-binary
 
 COPY --from=wal-g /wal-g /usr/local/bin/wal-g
 COPY entrypoint.sh /entrypoint.sh
